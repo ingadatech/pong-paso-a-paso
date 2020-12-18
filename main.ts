@@ -1,23 +1,52 @@
 function finalizaRonda () {
-	
+    iniciaRonda()
+}
+function rebotaPelota () {
+    if (pelota.overlapsWith(jugador1)) {
+        pelota.vx = pelota.vx * -1
+    } else {
+        pelota.vx = pelota.vx * -1
+    }
 }
 function iniciaRonda () {
     posicionaObjetos()
+    muevePelota()
+}
+function compruebaPelota () {
+    if (pelota.overlapsWith(jugador1) || pelota.overlapsWith(jugador2)) {
+        rebotaPelota()
+    } else {
+        compruebaGol()
+    }
+}
+function muevePelota () {
+    pelota.setVelocity(randint(maximaVelocidadPelota / 2, maximaVelocidadPelota), randint(maximaVelocidadPelota / 2, maximaVelocidadPelota))
+    if (Math.percentChance(50)) {
+        pelota.vx = pelota.vx * -1
+    }
+    if (Math.percentChance(50)) {
+        pelota.vy = pelota.vy * -1
+    }
+    if (true) {
+        console.logValue("pelota_vX", pelota.vx)
+        console.logValue("pelota_vY", pelota.vy)
+    }
 }
 function mueveJugador2 () {
-    if (pelota.y - jugador2.y != 0) {
+    if (Math.abs(pelota.y - jugador2.y) > velocidadJugador2) {
         if (pelota.y > jugador2.y) {
             jugador2.y += velocidadJugador2
         } else {
-            jugador2.y += 0 - velocidadJugador2
+            if (pelota.y < jugador2.y) {
+                jugador2.y += 0 - velocidadJugador2
+            } else {
+            	
+            }
         }
     }
-}
-function debugMovimientoJugador2 () {
-    if (true) {
-        pause(1000)
-        pelota.setPosition(randint(10, scene.screenWidth() - 10), randint(10, scene.screenHeight() - 10))
-        mueveJugador2()
+    if (false) {
+        console.logValue("pelota_Y", pelota.y)
+        console.logValue("jugador2_Y", jugador2.y)
     }
 }
 function finalizaPartida () {
@@ -26,8 +55,10 @@ function finalizaPartida () {
 function defineVariables () {
     maximaPuntuacion = 5
     velocidadJugador1 = 100
-    velocidadJugador2 = 5
-    velocidadPelota = 0
+    velocidadJugador2 = 3
+    maximaVelocidadPelota = 100
+    info.player1.setScore(0)
+    info.player2.setScore(0)
 }
 function iniciaPartida () {
     defineVariables()
@@ -246,20 +277,291 @@ function creaObjetos () {
         . . 5 5 5 5 5 5 . 
         `, SpriteKind.Projectile)
     pelota.setFlag(SpriteFlag.BounceOnWall, true)
+    porteria1 = sprites.create(img`
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        `, SpriteKind.Player)
+    porteria2 = sprites.create(img`
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        1111111111
+        `, SpriteKind.Player)
+}
+function compruebaGol () {
+    if (pelota.overlapsWith(porteria1)) {
+        info.player2.changeScoreBy(1)
+        if (info.player2.score() == maximaPuntuacion) {
+            finalizaPartida()
+        } else {
+            finalizaRonda()
+        }
+    }
+    if (pelota.overlapsWith(porteria2)) {
+        info.player1.changeScoreBy(1)
+        if (info.player1.score() == maximaPuntuacion) {
+            finalizaPartida()
+        } else {
+            finalizaRonda()
+        }
+    }
 }
 function posicionaObjetos () {
-    jugador1.setPosition(10, scene.screenHeight() / 2)
-    jugador2.setPosition(scene.screenWidth() - 10, scene.screenHeight() / 2)
+    jugador1.setPosition(15, scene.screenHeight() / 2)
+    jugador2.setPosition(scene.screenWidth() - 15, scene.screenHeight() / 2)
     pelota.setPosition(scene.screenWidth() / 2, scene.screenHeight() / 2)
+    pelota.setVelocity(0, 0)
+    porteria1.setPosition(1, scene.screenHeight() / 2)
+    porteria2.setPosition(scene.screenWidth() - 1, scene.screenHeight() / 2)
 }
-let jugador1: Sprite = null
-let velocidadPelota = 0
+let porteria2: Sprite = null
+let porteria1: Sprite = null
 let velocidadJugador1 = 0
 let maximaPuntuacion = 0
 let velocidadJugador2 = 0
+let maximaVelocidadPelota = 0
 let jugador2: Sprite = null
+let jugador1: Sprite = null
 let pelota: Sprite = null
 iniciaPartida()
-forever(function () {
-    debugMovimientoJugador2()
+game.onUpdate(function () {
+    compruebaPelota()
+    mueveJugador2()
+    if (false) {
+    	
+    }
 })
