@@ -2,7 +2,11 @@ function finalizaRonda () {
     iniciaRonda()
 }
 function rebotaPelota () {
-	
+    if (pelota.overlapsWith(jugador1)) {
+        pelota.vx = pelota.vx * -1
+    } else {
+        pelota.vx = pelota.vx * -1
+    }
 }
 function iniciaRonda () {
     posicionaObjetos()
