@@ -20,6 +20,7 @@ function muevePelota () {
     }
 }
 function mueveJugador2 () {
+    pause(300)
     if (pelota.y - jugador2.y != 0) {
         if (pelota.y > jugador2.y) {
             jugador2.y += velocidadJugador2
