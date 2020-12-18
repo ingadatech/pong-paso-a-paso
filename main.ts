@@ -261,5 +261,5 @@ let jugador2: Sprite = null
 let pelota: Sprite = null
 iniciaPartida()
 forever(function () {
-    debugMovimientoJugador2()
+	
 })
