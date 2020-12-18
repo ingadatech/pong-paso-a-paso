@@ -10,16 +10,9 @@ function rebotaPelota () {
 }
 function iniciaRonda () {
     posicionaObjetos()
-    muevePelota()
+    lanzaPelota()
 }
-function compruebaPelota () {
-    if (pelota.overlapsWith(jugador1) || pelota.overlapsWith(jugador2)) {
-        rebotaPelota()
-    } else {
-        compruebaGol()
-    }
-}
-function muevePelota () {
+function lanzaPelota () {
     pelota.setVelocity(randint(maximaVelocidadPelota / 2, maximaVelocidadPelota), randint(maximaVelocidadPelota / 2, maximaVelocidadPelota))
     if (Math.percentChance(50)) {
         pelota.vx = pelota.vx * -1
@@ -30,6 +23,13 @@ function muevePelota () {
     if (true) {
         console.logValue("pelota_vX", pelota.vx)
         console.logValue("pelota_vY", pelota.vy)
+    }
+}
+function compruebaPelota () {
+    if (pelota.overlapsWith(jugador1) || pelota.overlapsWith(jugador2)) {
+        rebotaPelota()
+    } else {
+        compruebaGol()
     }
 }
 function mueveJugador2 () {
@@ -553,8 +553,8 @@ let porteria1: Sprite = null
 let velocidadJugador1 = 0
 let maximaPuntuacion = 0
 let velocidadJugador2 = 0
-let maximaVelocidadPelota = 0
 let jugador2: Sprite = null
+let maximaVelocidadPelota = 0
 let jugador1: Sprite = null
 let pelota: Sprite = null
 iniciaPartida()
