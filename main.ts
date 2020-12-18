@@ -8,18 +8,18 @@ function rebotaPelota () {
         pelota.vx = pelota.vx * -1
     }
 }
-function iniciaRonda () {
-    posicionaObjetos()
-    muevePelota()
-}
-function compruebaPelota () {
+function compruebaEstadoPelota () {
     if (pelota.overlapsWith(jugador1) || pelota.overlapsWith(jugador2)) {
         rebotaPelota()
     } else {
         compruebaGol()
     }
 }
-function muevePelota () {
+function iniciaRonda () {
+    posicionaObjetos()
+    lanzaPelota()
+}
+function lanzaPelota () {
     pelota.setVelocity(randint(maximaVelocidadPelota / 2, maximaVelocidadPelota), randint(maximaVelocidadPelota / 2, maximaVelocidadPelota))
     if (Math.percentChance(50)) {
         pelota.vx = pelota.vx * -1
@@ -559,7 +559,7 @@ let jugador1: Sprite = null
 let pelota: Sprite = null
 iniciaPartida()
 game.onUpdate(function () {
-    compruebaPelota()
+    compruebaEstadoPelota()
     mueveJugador2()
     if (false) {
     	
