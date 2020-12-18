@@ -3,6 +3,14 @@ function finalizaRonda () {
 }
 function iniciaRonda () {
     posicionaObjetos()
+    muevePelota()
+}
+function muevePelota () {
+    pelota.setVelocity(randint(maximaVelocidadPelota / 2, maximaVelocidadPelota), randint(maximaVelocidadPelota / 2, maximaVelocidadPelota))
+    if (debugging == 1) {
+        console.logValue("pelotaVx", pelota.vx)
+        console.logValue("pelotaVy", pelota.vy)
+    }
 }
 function mueveJugador2 () {
     if (pelota.y - jugador2.y != 0) {
@@ -27,7 +35,7 @@ function defineVariables () {
     maximaPuntuacion = 5
     velocidadJugador1 = 100
     velocidadJugador2 = 5
-    velocidadPelota = 0
+    maximaVelocidadPelota = 100
 }
 function iniciaPartida () {
     defineVariables()
@@ -253,12 +261,14 @@ function posicionaObjetos () {
     pelota.setPosition(scene.screenWidth() / 2, scene.screenHeight() / 2)
 }
 let jugador1: Sprite = null
-let velocidadPelota = 0
 let velocidadJugador1 = 0
 let maximaPuntuacion = 0
 let velocidadJugador2 = 0
 let jugador2: Sprite = null
+let maximaVelocidadPelota = 0
 let pelota: Sprite = null
+let debugging = 0
+debugging = 0
 iniciaPartida()
 forever(function () {
 	
