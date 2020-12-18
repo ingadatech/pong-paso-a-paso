@@ -20,8 +20,7 @@ function muevePelota () {
     }
 }
 function mueveJugador2 () {
-    pause(300)
-    if (pelota.y - jugador2.y != 0) {
+    if (Math.abs(pelota.y - jugador2.y) > velocidadJugador2) {
         if (pelota.y > jugador2.y) {
             jugador2.y += velocidadJugador2
         } else {
@@ -286,6 +285,6 @@ let pelota: Sprite = null
 let debugging = 0
 debugging = 1
 iniciaPartida()
-forever(function () {
+game.onUpdate(function () {
     mueveJugador2()
 })
