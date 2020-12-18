@@ -8,6 +8,13 @@ function rebotaPelota () {
         pelota.vx = pelota.vx * -1
     }
 }
+function compruebaEstadoPelota () {
+    if (pelota.overlapsWith(jugador1) || pelota.overlapsWith(jugador2)) {
+        rebotaPelota()
+    } else {
+        compruebaGol()
+    }
+}
 function iniciaRonda () {
     posicionaObjetos()
     lanzaPelota()
@@ -23,13 +30,6 @@ function lanzaPelota () {
     if (true) {
         console.logValue("pelota_vX", pelota.vx)
         console.logValue("pelota_vY", pelota.vy)
-    }
-}
-function compruebaPelota () {
-    if (pelota.overlapsWith(jugador1) || pelota.overlapsWith(jugador2)) {
-        rebotaPelota()
-    } else {
-        compruebaGol()
     }
 }
 function mueveJugador2 () {
@@ -553,13 +553,13 @@ let porteria1: Sprite = null
 let velocidadJugador1 = 0
 let maximaPuntuacion = 0
 let velocidadJugador2 = 0
-let jugador2: Sprite = null
 let maximaVelocidadPelota = 0
+let jugador2: Sprite = null
 let jugador1: Sprite = null
 let pelota: Sprite = null
 iniciaPartida()
 game.onUpdate(function () {
-    compruebaPelota()
+    compruebaEstadoPelota()
     mueveJugador2()
     if (false) {
     	
