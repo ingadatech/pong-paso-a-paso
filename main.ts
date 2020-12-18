@@ -6,7 +6,14 @@ function iniciaRonda () {
     muevePelota()
 }
 function muevePelota () {
+    let ultimoJugadorGol = ""
     pelota.setVelocity(randint(maximaVelocidadPelota / 2, maximaVelocidadPelota), randint(maximaVelocidadPelota / 2, maximaVelocidadPelota))
+    if (ultimoJugadorGol == "1") {
+        pelota.vx = pelota.vx * -1
+    }
+    if (Math.percentChance(50)) {
+        pelota.vy = pelota.vy * -1
+    }
     if (debugging == 1) {
         console.logValue("pelotaVx", pelota.vx)
         console.logValue("pelotaVy", pelota.vy)
@@ -17,8 +24,16 @@ function mueveJugador2 () {
         if (pelota.y > jugador2.y) {
             jugador2.y += velocidadJugador2
         } else {
-            jugador2.y += 0 - velocidadJugador2
+            if (pelota.y < jugador2.y) {
+                jugador2.y += 0 - velocidadJugador2
+            } else {
+            	
+            }
         }
+    }
+    if (debugging == 1) {
+        console.logValue("pelota_Y", pelota.y)
+        console.logValue("jugador2_Y", jugador2.y)
     }
 }
 function debugMovimientoJugador2 () {
@@ -34,7 +49,7 @@ function finalizaPartida () {
 function defineVariables () {
     maximaPuntuacion = 5
     velocidadJugador1 = 100
-    velocidadJugador2 = 5
+    velocidadJugador2 = 20
     maximaVelocidadPelota = 100
 }
 function iniciaPartida () {
@@ -268,8 +283,8 @@ let jugador2: Sprite = null
 let maximaVelocidadPelota = 0
 let pelota: Sprite = null
 let debugging = 0
-debugging = 0
+debugging = 1
 iniciaPartida()
 forever(function () {
-	
+    mueveJugador2()
 })
